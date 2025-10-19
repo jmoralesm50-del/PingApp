@@ -1,0 +1,2 @@
+# No hay dependencias externas de PyPI para ejecutar la app.
+# Tkinter y sqlite3 vienen con la instalación estándar de Python.

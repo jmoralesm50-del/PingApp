@@ -1,0 +1,51 @@
+name: CI - Pineo
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-test-build:
+    runs-on: windows-latest
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('requirements*.txt') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if (Test-Path requirements.txt) { pip install -r requirements.txt }
+          if (Test-Path requirements-dev.txt) { pip install -r requirements-dev.txt }
+        shell: pwsh
+
+      - name: Lint (flake8)
+        run: flake8 app main.py
+
+      - name: Tests (pytest)
+        run: pytest -q --maxfail=1 --disable-warnings
+
+      - name: Build executable (PyInstaller)
+        run: pyinstaller --noconfirm --clean --onefile --name PineoMonitor main.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PineoMonitor_win_x64
+          path: dist/PineoMonitor.exe
