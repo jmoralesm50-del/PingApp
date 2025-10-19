@@ -4,6 +4,8 @@ import csv
 from typing import Iterable, Tuple
 
 def export_to_csv(
+        
+        
     path: str,
     rows: Iterable[Tuple[str, str, str, str, str, str]]
 ) -> None:
