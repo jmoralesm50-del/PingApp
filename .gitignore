@@ -9,3 +9,6 @@ dist/
 Thumbs.db
 .vscode/
 pineo.db
+
+# Evita falsos positivos en Windows con dispositivo reservado
+NUL
