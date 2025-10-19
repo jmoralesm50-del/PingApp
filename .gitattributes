@@ -1,0 +1,14 @@
+
+# Normaliza texto a LF en el repo y deja que el SO convierta si hace falta
+* text=auto
+
+# Asegura LF para YAML de Actions (importante)
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Código Python con LF
+*.py text eol=lf
+
+# Archivos de Windows (bat/cmd) con CRLF si usas alguno
+*.bat text eol=crlf
+*.cmd text eol=crlf
