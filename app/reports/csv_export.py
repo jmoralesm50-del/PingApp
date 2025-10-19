@@ -1,16 +1,13 @@
 # app/reports/csv_export.py
+
 from __future__ import annotations
 import csv
 from typing import Iterable, Tuple
 
 
-
 def export_to_csv(
-
-
     path: str,
     rows: Iterable[Tuple[str, str, str, str, str, str]]
-
 ) -> None:
     """
     rows: iterable de tuplas (ip, status, rtt_ms, hostname, timestamp, method)
