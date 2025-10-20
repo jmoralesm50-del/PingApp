@@ -18,4 +18,7 @@ def export_to_csv(
         writer.writerow(headers)
         for r in rows:
             writer.writerow(r)
-            
+# Ejemplo de uso:
+# rows = [
+#     ("
+#         "
